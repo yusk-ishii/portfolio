@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Figtree:wght@400&family=Noto+Sans+JP:wght@400;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-green-400: #509080;
+  --color-grey-300: #9b9b9b;
+  --color-grey-500: #545454;
+  --color-grey-600: #333333;
+}
