@@ -71,7 +71,7 @@ const workCards = [
         <!-- Work cards grid -->
         <div class="grid grid-cols-2 gap-x-16 gap-y-12">
           {workCards.map((card) => (
-            <button class="flex flex-col gap-3 items-start text-left cursor-pointer group">
+            <button class="flex flex-col gap-3 items-start text-left cursor-pointer group" data-work-card>
               <div class="w-full aspect-[592/444] bg-[#d9d9d9] rounded-2xl overflow-hidden">
               </div>
               <div class="flex flex-col gap-3 w-full">
@@ -130,6 +130,153 @@ const workCards = [
         ©2026 ISHII YUSUKE
       </p>
     </footer>
+
+    <!-- Popup -->
+    <div
+      id="popup"
+      class="fixed inset-0 bg-black/20 z-50 overflow-y-auto hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="プロジェクト詳細"
+    >
+      <div class="flex justify-center py-20 min-h-full" id="popup-overlay">
+        <div
+          id="popup-content"
+          class="bg-white rounded-2xl w-[1248px] px-[110px] py-20 flex flex-col items-center self-start"
+        >
+          <!-- Inner content: 1024px wide -->
+          <div class="w-[1024px] flex flex-col gap-10 items-center">
+
+            <!-- Frame: title + meta + hero + overview -->
+            <div class="flex flex-col gap-16 items-center w-full">
+
+              <!-- Title area -->
+              <div class="flex flex-col gap-10 items-start w-full">
+
+                <!-- Title block + meta group -->
+                <div class="flex flex-col gap-32 items-start w-full">
+
+                  <!-- Title -->
+                  <div class="flex flex-col gap-5 items-start text-[#333] font-['Noto_Sans_JP']">
+                    <p class="text-[80px] leading-none font-bold">calm coffee</p>
+                    <p class="text-[21px] leading-[1.4]">"静けさ"をコンセプトにした、七里ヶ浜にある喫茶店のWebサイト</p>
+                  </div>
+
+                  <!-- Meta -->
+                  <div class="flex gap-8 items-center justify-end w-full font-['Figtree'] font-bold text-base whitespace-nowrap">
+                    <div class="flex flex-col gap-2 items-start">
+                      <p class="text-[#9b9b9b] leading-[1.4]">Date</p>
+                      <p class="text-[#333] leading-[1.4]">2025.07 – 2025.08</p>
+                    </div>
+                    <div class="flex flex-col gap-2 items-start">
+                      <p class="text-[#9b9b9b] leading-[1.4]">Scope</p>
+                      <p class="text-[#333] leading-[1.4]">Web Design, Development</p>
+                    </div>
+                    <div class="flex flex-col gap-2 items-start">
+                      <p class="text-[#9b9b9b] leading-[1.4]">Stack</p>
+                      <p class="text-[#333] leading-[1.4]">Figma, Astro.js, Three.js, GSAP, Lenis, Swup</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hero image placeholder -->
+                <div class="bg-[#d9d9d9] h-[633px] rounded-2xl w-full shrink-0"></div>
+              </div>
+
+              <!-- Overview block -->
+              <div class="flex gap-20 items-start w-[880px]">
+                <p class="font-['Noto_Sans_JP'] font-bold text-[26px] text-[#333] leading-none whitespace-nowrap shrink-0">Overview</p>
+                <p class="font-['Noto_Sans_JP'] text-base leading-[1.8] text-[#333] flex-1">
+                  鎌倉・七里ヶ浜にある架空の喫茶店「calm coffee」のWebサイト。日常の喧騒から離れて静かな時間を求める人へ向け、「静けさ」という感情価値をWeb上で体感できることをテーマに制作しました。
+                </p>
+              </div>
+            </div>
+
+            <!-- Section wrapper -->
+            <div class="flex flex-col gap-32 items-start px-16 py-20 w-full">
+
+              <!-- Section 1 -->
+              <div class="flex flex-col gap-16 items-center w-[880px]">
+                <div class="flex flex-col items-start px-16 w-full">
+                  <div class="flex flex-col gap-10 items-start w-full text-[#333] font-['Noto_Sans_JP']">
+                    <div class="text-[32px] leading-[1.6] font-bold w-full">
+                      <p>下流から上流へ。</p>
+                      <p>ユーザー体験から想像して作ったWebサイト。</p>
+                    </div>
+                    <div class="flex flex-col gap-2 text-base leading-[1.8]">
+                      <p>これまでフロントエンドとして、体験設計やUIデザインなどの上流工程に携わる機会は少なく、デザインが固まった段階から実装を担うことがほとんどでした。しかし仕事として取り組む中で、次第に「なぜこの体験になっているのか」「なぜこのUIなのか」といった、体験そのものを設計するプロセスへ関心が向くようになりました。</p>
+                      <p>その関心から取り組んだのが、鎌倉・七里ヶ浜にある架空の喫茶店「calm coffee」のWebサイト制作です。出発点となったのは、「この場所に喫茶店をつくるなら、どんな時間や空気感を届けるべきだろう？」という問いでした。どんな人が訪れ、どんな時間を過ごすのか。そのイメージを丁寧に膨らませながら、店名・ロゴ・コンセプトを設計し、ブランド体験を軸にサイト構成・UIデザイン・実装まで一貫して制作しました。</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-[#d9d9d9] h-[633px] rounded-2xl w-full shrink-0"></div>
+              </div>
+
+              <!-- Section 2 -->
+              <div class="flex flex-col gap-16 items-center w-[880px]">
+                <div class="flex flex-col items-start px-16 w-full">
+                  <div class="flex flex-col gap-10 items-start w-full text-[#333] font-['Noto_Sans_JP']">
+                    <div class="text-[32px] leading-[1.6] font-bold w-full">
+                      <p>閲覧ストーリーとユーザー認知を起点に、</p>
+                      <p>サイト構成を設計。</p>
+                    </div>
+                    <p class="text-base leading-[1.8]">calm coffeeを訪れるユーザーを、「新規認知層」と「既存ファン層」の2つに定義しました。新規認知層に対してはFVで商品を訴求するのではなく、空間・風景・世界観を先に体感させることで「行ってみたい」という気持ちを引き出す構成にしました。一方、既存ファン層には営業情報や新着情報への最短導線を用意しました。それぞれの動機に合わせて情報の優先順位と導線を整理し、ワイヤーフレームに落とし込んでから設計を進めました。</p>
+                  </div>
+                </div>
+                <div class="bg-[#d9d9d9] h-[633px] rounded-2xl w-full shrink-0"></div>
+              </div>
+
+              <!-- Section 3 -->
+              <div class="flex flex-col gap-16 items-center w-[880px]">
+                <div class="flex flex-col items-start px-16 w-full">
+                  <div class="flex flex-col gap-10 items-start w-full text-[#333] font-['Noto_Sans_JP']">
+                    <div class="text-[32px] leading-[1.6] font-bold w-full">
+                      <p>ユーザー体験を軸に、</p>
+                      <p>デザインと実装を一貫して作り込む。</p>
+                    </div>
+                    <p class="text-base leading-[1.8]">静けさを、どうビジュアルで表現するか。その問いを起点に、デザイントークンを作成し、色・タイポグラフィ・余白を統一することでサイト全体に一貫性のあるUIを実現しました。彩度を抑えた3色のみで構成したカラーパレットは、余計な主張をせず、静けさと落ち着きを視覚的に表現することを意識しています。FVは直帰率を下げる上で最も重要な要素と考え、様々なパターンを試作しました。その試行錯誤の結果としてThree.jsによる波のような画像切り替えアニメーションがデザインに最もマッチする表現だと判断し、採用しています。Lenisによる滑らかなスクロールやSwupによる柔らかいページ遷移など、細部まで「静けさ」を体感できるよう作り込みました。</p>
+                  </div>
+                </div>
+                <div class="bg-[#d9d9d9] h-[633px] rounded-2xl w-full shrink-0"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const popup = document.getElementById('popup')!;
+      const popupContent = document.getElementById('popup-content')!;
+
+      function openPopup() {
+        popup.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        popup.scrollTop = 0;
+      }
+
+      function closePopup() {
+        popup.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-work-card]').forEach(card => {
+        card.addEventListener('click', openPopup);
+      });
+
+      popup.addEventListener('click', (e) => {
+        if (!popupContent.contains(e.target as Node)) {
+          closePopup();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+          closePopup();
+        }
+      });
+    </script>
 
   </body>
 </html>
