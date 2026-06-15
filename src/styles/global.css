@@ -1,11 +1,33 @@
 @import 'tailwindcss';
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  outline: none;
+}
+
+::selection {
+  background-color: var(--color-green-300);
+  color: #fff;
+}
+
 @theme inline {
   --font-sans: var(--font-inter-gf), var(--font-line-seed-jp);
   --font-seed: var(--font-line-seed-jp);
   --font-inter: var(--font-inter-gf);
   --font-figtree: var(--font-figtree-gf);
   --font-montserrat: var(--font-montserrat-gf);
+}
+
+@theme {
+  --color-green-300: #68b9a4;
+  --color-green-400: #509080;
+  --color-grey-100: #f5f5f5;
+  --color-grey-300: #9b9b9b;
+  --color-grey-500: #545454;
+  --color-grey-600: #333333;
 }
 
 /* --- Popup animations --- */
@@ -47,11 +69,4 @@
 
 [data-popup-panel].is-open {
   display: flex;
-}
-
-:root {
-  --color-green-400: #509080;
-  --color-grey-300: #9b9b9b;
-  --color-grey-500: #545454;
-  --color-grey-600: #333333;
 }

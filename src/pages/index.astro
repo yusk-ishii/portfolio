@@ -18,6 +18,7 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#509080" />
     <meta name="generator" content={Astro.generator} />
     <title>ISHII YUSUKE</title>
     <Font cssVariable="--font-line-seed-jp" preload />
@@ -35,7 +36,7 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
             href="https://github.com/yusk-ishii"
             target="_blank"
             rel="noopener noreferrer"
-            class="block h-12 w-12 text-[#333] transition-opacity hover:opacity-70 md:h-14 md:w-14"
+            class="text-grey-600 block h-12 w-12 transition-opacity hover:opacity-70 md:h-14 md:w-14"
             aria-label="GitHub"
           >
             <img src={githubSrc} alt="" aria-hidden="true" class="h-auto w-full" />
@@ -50,9 +51,9 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
         <div class="mx-auto w-full max-w-312">
           <!-- Section header -->
           <div class="mb-10 flex items-center gap-3 md:mb-16 md:gap-4">
-            <div class="h-5 w-5 shrink-0 rounded-full bg-[#509080] md:h-6 md:w-6"></div>
+            <div class="h-5 w-5 shrink-0 rounded-full bg-green-400 md:h-6 md:w-6"></div>
             <h2
-              class="font-montserrat text-2xl leading-none font-medium whitespace-nowrap text-[#333] md:text-[32px]"
+              class="font-montserrat text-grey-600 text-2xl leading-none font-medium whitespace-nowrap md:text-[32px]"
             >
               Personal Work
             </h2>
@@ -81,11 +82,11 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
                 class="h-12 w-auto object-contain object-left md:h-15"
                 style="max-width: 251px;"
               />
-              <p class="text-2xl leading-[1.8] text-[#333] md:text-[32px]">
+              <p class="text-grey-600 text-2xl leading-[1.8] md:text-[32px]">
                 石井 佑典 / Ishii Yusuke
               </p>
               <div
-                class="flex flex-col gap-6 text-sm leading-[1.8] text-[#333] md:gap-8 md:text-base"
+                class="text-grey-600 flex flex-col gap-6 text-sm leading-[1.8] md:gap-8 md:text-base"
               >
                 <p>
                   フロントエンドエンジニアとして8年間、デザインを形にする仕事に携わってきました。その中で「なぜこのUIになっているのか」「なぜこの体験の順番なのか」という問いが積み重なり、デザインの上流から考えることへの興味が生まれました。
@@ -98,7 +99,7 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
 
             <!-- Right: Photo -->
             <div
-              class="aspect-4/3 min-w-0 flex-1 overflow-hidden rounded-lg bg-[#F5F5F5] min-[1000px]:aspect-auto min-[1000px]:h-148 md:rounded-2xl"
+              class="bg-grey-100 aspect-4/3 min-w-0 flex-1 overflow-hidden rounded-lg min-[1000px]:aspect-auto min-[1000px]:h-148 md:rounded-2xl"
             >
               <img
                 src={profileIllustSrc}
@@ -113,7 +114,7 @@ const works = (await getCollection('works')).sort((a, b) => a.data.order - b.dat
 
     <!-- Footer -->
     <footer class="flex items-center justify-center py-8 md:py-10">
-      <p class="text-[10px] leading-none whitespace-nowrap text-[#545454]">©2026 ISHII YUSUKE</p>
+      <p class="text-grey-500 text-[10px] leading-none whitespace-nowrap">©2026 ISHII YUSUKE</p>
     </footer>
 
     <WorkPopup works={works} />

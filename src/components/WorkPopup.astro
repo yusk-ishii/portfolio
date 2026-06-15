@@ -60,7 +60,7 @@ function resolveVideo(id: string, path: string | undefined) {
       <!-- Close button -->
       <button
         id="popup-close"
-        class="absolute top-4 right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-[#333] transition-opacity hover:opacity-60 md:top-8 md:right-8 md:h-10 md:w-10"
+        class="text-grey-600 absolute top-4 right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition-opacity hover:opacity-60 md:top-8 md:right-8 md:h-10 md:w-10"
         aria-label="閉じる"
         type="button"
       >
@@ -78,7 +78,7 @@ function resolveVideo(id: string, path: string | undefined) {
                 <div class="flex w-full flex-col items-start gap-10">
                   {/* Title block + meta */}
                   <div class="flex w-full flex-col items-start gap-10 md:gap-32">
-                    <div class="flex flex-col items-start gap-5 text-[#333]">
+                    <div class="text-grey-600 flex flex-col items-start gap-5">
                       <p class="text-[40px] leading-none font-bold md:text-[80px]">
                         {w.data.title}
                       </p>
@@ -90,22 +90,22 @@ function resolveVideo(id: string, path: string | undefined) {
                       <div class="font-figtree flex w-full flex-col items-start gap-4 text-base font-bold whitespace-nowrap min-[1000px]:flex-row min-[1000px]:items-center min-[1000px]:justify-end min-[1000px]:gap-8">
                         {w.data.date && (
                           <div class="flex flex-col items-start gap-2">
-                            <p class="leading-[1.4] text-[#9b9b9b]">Date</p>
-                            <p class="leading-[1.4] text-[#333]">{w.data.date}</p>
+                            <p class="text-grey-300 leading-[1.4]">Date</p>
+                            <p class="text-grey-600 leading-[1.4]">{w.data.date}</p>
                           </div>
                         )}
                         {w.data.scope && (
                           <div class="flex flex-col items-start gap-2">
-                            <p class="leading-[1.4] text-[#9b9b9b]">Scope</p>
-                            <p class="leading-[1.4] wrap-break-word whitespace-normal text-[#333]">
+                            <p class="text-grey-300 leading-[1.4]">Scope</p>
+                            <p class="text-grey-600 leading-[1.4] wrap-break-word whitespace-normal">
                               {w.data.scope}
                             </p>
                           </div>
                         )}
                         {w.data.stack && (
                           <div class="flex flex-col items-start gap-2">
-                            <p class="leading-[1.4] text-[#9b9b9b]">Stack</p>
-                            <p class="leading-[1.4] wrap-break-word whitespace-normal text-[#333]">
+                            <p class="text-grey-300 leading-[1.4]">Stack</p>
+                            <p class="text-grey-600 leading-[1.4] wrap-break-word whitespace-normal">
                               {w.data.stack}
                             </p>
                           </div>
@@ -118,7 +118,7 @@ function resolveVideo(id: string, path: string | undefined) {
                               href={w.data.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="font-figtree flex w-full items-center justify-center gap-2 rounded-full border border-[#333] px-5 py-[14px] text-sm font-bold text-[#333] transition-opacity hover:opacity-70 min-[1000px]:w-auto"
+                              class="font-figtree border-grey-600 text-grey-600 flex w-full items-center justify-center gap-2 rounded-full border px-5 py-3.5 text-sm font-bold transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
                             >
                               <img src={githubIconSrc} class="h-5 w-5" alt="" aria-hidden="true" />
                               View on GitHub
@@ -129,7 +129,7 @@ function resolveVideo(id: string, path: string | undefined) {
                               href={w.data.website}
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="font-figtree flex w-full items-center justify-center gap-2 rounded-full bg-[#333] px-5 py-[14px] text-sm font-bold text-white transition-opacity hover:opacity-70 min-[1000px]:w-auto"
+                              class="font-figtree bg-grey-600 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
                             >
                               Visit Website
                               <img
@@ -161,10 +161,10 @@ function resolveVideo(id: string, path: string | undefined) {
                 {/* Overview */}
                 {w.data.overview && (
                   <div class="flex w-full flex-col items-start gap-6 md:max-w-220 md:flex-row md:gap-[8%]">
-                    <p class="shrink-0 text-xl leading-none font-bold text-[#333] md:text-[26px]">
+                    <p class="text-grey-600 shrink-0 text-xl leading-none font-bold md:text-[26px]">
                       Overview
                     </p>
-                    <p class="flex-1 text-sm leading-[1.8] text-[#333] md:text-base">
+                    <p class="text-grey-600 flex-1 text-sm leading-[1.8] md:text-base">
                       {w.data.overview}
                     </p>
                   </div>
@@ -180,7 +180,7 @@ function resolveVideo(id: string, path: string | undefined) {
                     return (
                       <div class="flex w-full flex-col items-center gap-10 md:max-w-220 md:gap-16">
                         <div class="flex w-full flex-col items-start px-0 min-[768px]:px-8 min-[1200px]:px-16">
-                          <div class="flex w-full flex-col items-start gap-6 text-[#333] md:gap-10">
+                          <div class="text-grey-600 flex w-full flex-col items-start gap-6 md:gap-10">
                             <div class="w-full text-xl leading-[1.6] font-bold md:text-[32px]">
                               {section.heading
                                 .trim()
@@ -204,7 +204,7 @@ function resolveVideo(id: string, path: string | undefined) {
                             {sectionVideo.mp4 && <source src={sectionVideo.mp4} type="video/mp4" />}
                           </video>
                         ) : sectionSrc ? (
-                          <div class="w-full rounded-lg bg-[#F5F5F5] px-8 py-12 min-[1200px]:px-16 md:rounded-2xl">
+                          <div class="bg-grey-100 w-full rounded-lg px-8 py-12 min-[1200px]:px-16 md:rounded-2xl">
                             <Image src={sectionSrc} alt="" class="w-full" format="webp" />
                           </div>
                         ) : (
@@ -238,33 +238,60 @@ function resolveVideo(id: string, path: string | undefined) {
   const popupOverlay = document.getElementById('popup-overlay')!;
   const closeBtn = document.getElementById('popup-close')!;
 
-  function openPopup(slug: string) {
-    document.querySelectorAll<HTMLElement>('[data-popup-panel]').forEach((p) => {
-      p.classList.remove('is-open');
-    });
-    const panel = document.querySelector<HTMLElement>(`[data-popup-panel="${slug}"]`);
-    if (!panel) return;
-    panel.classList.add('is-open');
+  let enterRafId: number | null = null;
+  let activePanel: HTMLElement | null = null;
 
+  function cancelEnterRaf() {
+    if (enterRafId !== null) {
+      cancelAnimationFrame(enterRafId);
+      enterRafId = null;
+    }
+  }
+
+  function onCloseTransitionEnd(e: TransitionEvent) {
+    if (e.propertyName !== 'transform') return;
+    if (!popup.classList.contains('is-closing')) return; // #2: stale event after re-open
+    popupContent.removeEventListener('transitionend', onCloseTransitionEnd);
+    popup.classList.remove('is-open', 'is-closing');
+  }
+
+  function openPopup(slug: string) {
+    // #1: validate before clearing the current panel
+    const nextPanel = document.querySelector<HTMLElement>(`[data-popup-panel="${slug}"]`);
+    if (!nextPanel) return;
+    activePanel?.classList.remove('is-open');
+    activePanel = nextPanel;
+    activePanel.classList.add('is-open');
+
+    cancelEnterRaf();
+    popupContent.removeEventListener('transitionend', onCloseTransitionEnd);
+    popupContent.classList.remove('is-entering');
     popup.classList.remove('is-closing');
     popup.classList.add('is-open');
     popup.scrollTop = 0;
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
+
+    // #3: double-rAF for cross-browser reliability
+    enterRafId = requestAnimationFrame(() => {
+      enterRafId = requestAnimationFrame(() => {
+        enterRafId = null;
         popupContent.classList.add('is-entering');
       });
     });
   }
 
   function closePopup() {
-    popup.classList.add('is-closing');
+    // #4: guard on is-open too, not just is-closing
+    if (!popup.classList.contains('is-open') || popup.classList.contains('is-closing')) return;
+    cancelEnterRaf();
+    activePanel = null; // #5: clear stale reference
+    const wasEntering = popupContent.classList.contains('is-entering');
     popupContent.classList.remove('is-entering');
-    function onTransitionEnd(e: TransitionEvent) {
-      if (e.propertyName !== 'transform') return;
-      popupContent.removeEventListener('transitionend', onTransitionEnd);
-      popup.classList.remove('is-open', 'is-closing');
+    if (wasEntering) {
+      popup.classList.add('is-closing');
+      popupContent.addEventListener('transitionend', onCloseTransitionEnd);
+    } else {
+      popup.classList.remove('is-open');
     }
-    popupContent.addEventListener('transitionend', onTransitionEnd);
   }
 
   document.querySelectorAll<HTMLElement>('[data-work-card]').forEach((card) => {
