@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+interface Props {
+  entry: CollectionEntry<'works'>;
+}
+
+const { entry } = Astro.props;
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/works/**/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+
+function resolveImage(id: string, path: string | undefined) {
+  if (!path) return undefined;
+  const key = `/src/assets/works/${id}/${path.replace('./', '')}`;
+  return allImages[key]?.default;
+}
+
+const heroSrc = resolveImage(entry.id, entry.data.heroImage);
+---
+
+<button
+  class="group flex cursor-pointer flex-col items-start gap-3 text-left"
+  data-work-card
+  data-work-slug={entry.id}
+  type="button"
+>
+  <div class="w-full overflow-hidden rounded-lg md:rounded-2xl">
+    {
+      heroSrc ? (
+        <Image
+          src={heroSrc}
+          alt={entry.data.title}
+          class="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          format="webp"
+        />
+      ) : (
+        <div class="aspect-4/3 w-full bg-[#d9d9d9]" />
+      )
+    }
+  </div>
+  <div class="flex w-full flex-col gap-1 md:gap-2">
+    <p class="font-figtree text-base leading-[1.8] font-normal text-[#9b9b9b]">
+      {entry.data.tags}
+    </p>
+    <p class="text-[40px] leading-[1.1] font-bold tracking-[-0.02em] text-[#333] md:text-[43px]">
+      {entry.data.title}
+    </p>
+    <p class="text-sm leading-[1.8] text-[#545454] md:text-base">
+      {entry.data.description}
+    </p>
+  </div>
+</button>
