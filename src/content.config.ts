@@ -14,8 +14,10 @@ const works = defineCollection({
     stack: z.string(),
     overview: z.string(),
     heroImage: z.string().optional(),
+    thumbnailImage: z.string().optional(),
     github: z.string().url().optional(),
     website: z.string().url().optional(),
+    notion: z.string().url().optional(),
     sections: z.array(
       z.object({
         heading: z.string(),

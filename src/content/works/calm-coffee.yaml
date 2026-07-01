@@ -6,6 +6,7 @@ date: '2025.07 – 2025.08'
 scope: Web Design, Development
 stack: 'Figma, Astro.js, Three.js, GSAP, Lenis, Swup'
 heroImage: ./top.jpg
+thumbnailImage: ./thumbnail.jpg
 github: https://github.com/yusk-ishii/calm-coffee-web
 website: https://yusk-ishii.github.io/calm-coffee-web
 overview: >
