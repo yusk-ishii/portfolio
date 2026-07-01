@@ -39,7 +39,7 @@ function resolveVideo(id: string, path: string | undefined) {
 
 <div
   id="popup"
-  class="fixed inset-0 z-50 overflow-y-auto overscroll-none"
+  class="fixed inset-0 z-50"
   role="dialog"
   aria-modal="true"
   aria-label="プロジェクト詳細"
@@ -51,191 +51,209 @@ function resolveVideo(id: string, path: string | undefined) {
   >
   </div>
   <div
-    class="relative flex min-h-full justify-center px-6 py-10 md:px-12 md:py-20"
+    class="absolute inset-0 flex items-center justify-center px-0 py-6 md:px-12 md:py-10"
     id="popup-overlay"
   >
     <div
       id="popup-content"
-      class="relative flex w-full max-w-312 flex-col items-center self-start rounded-lg bg-white px-5 py-16 md:rounded-2xl md:px-12 md:py-20"
+      class="relative flex max-h-[90dvh] w-full max-w-312 flex-col items-center overflow-hidden rounded-xl bg-white md:rounded-2xl"
     >
       <!-- Close button -->
       <button
         id="popup-close"
-        class="absolute top-4 right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full md:top-8 md:right-8 md:h-10 md:w-10"
+        class="absolute top-4 right-4 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full md:top-8 md:right-8 md:h-10 md:w-10"
         aria-label="閉じる"
         type="button"
       >
         <img src={closeIconSrc} class="h-full w-full" alt="" aria-hidden="true" />
       </button>
 
-      <!-- One panel per work, statically rendered by Astro -->
-      {
-        works.map((w) => {
-          const heroSrc = resolveImage(w.id, w.data.heroImage);
-          return (
-            <div data-popup-panel={w.id} class="w-full flex-col items-center gap-10 md:max-w-5xl">
-              {/* Title area */}
-              <div class="flex w-full flex-col items-center gap-16">
-                <div class="flex w-full flex-col items-start gap-10">
-                  {/* Title block + meta */}
-                  <div class="flex w-full flex-col items-start gap-10 md:gap-32">
-                    <div class="text-grey-600 flex flex-col items-start gap-5">
-                      <p class="text-[40px] leading-none font-bold md:text-[80px]">
-                        {w.data.title}
-                      </p>
-                      <p class="text-base leading-[1.4] md:text-[21px]">{w.data.description}</p>
-                    </div>
+      <!-- Scrollable inner -->
+      <div
+        id="popup-scroll"
+        class="flex w-full flex-col items-center overflow-y-auto px-5 pt-16 pb-8 md:px-12 md:pt-20 md:pb-10"
+      >
+        <!-- One panel per work, statically rendered by Astro -->
+        {
+          works.map((w) => {
+            const heroSrc = resolveImage(w.id, w.data.heroImage);
+            return (
+              <div data-popup-panel={w.id} class="w-full flex-col items-center gap-10 md:max-w-5xl">
+                {/* Title area */}
+                <div class="flex w-full flex-col items-center gap-16">
+                  <div class="flex w-full flex-col items-start gap-10">
+                    {/* Title block + meta */}
+                    <div class="flex w-full flex-col items-start gap-10 md:gap-32">
+                      <div class="text-grey-600 flex flex-col items-start gap-5">
+                        <p class="text-[40px] leading-none font-bold md:text-[80px]">
+                          {w.data.title}
+                        </p>
+                        <p class="text-base leading-[1.4] md:text-[21px]">{w.data.description}</p>
+                      </div>
 
-                    {/* Meta + Buttons */}
-                    <div class="flex w-full flex-col items-start gap-7 md:items-end">
-                      <div class="font-figtree flex w-full flex-col items-start gap-4 text-base font-bold whitespace-nowrap min-[1000px]:flex-row min-[1000px]:items-center min-[1000px]:justify-end min-[1000px]:gap-8">
-                        {w.data.date && (
-                          <div class="flex flex-col items-start gap-2">
-                            <p class="text-grey-300 leading-[1.4]">Date</p>
-                            <p class="text-grey-600 leading-[1.4]">{w.data.date}</p>
-                          </div>
-                        )}
-                        {w.data.scope && (
-                          <div class="flex flex-col items-start gap-2">
-                            <p class="text-grey-300 leading-[1.4]">Scope</p>
-                            <p class="text-grey-600 leading-[1.4] wrap-break-word whitespace-normal">
-                              {w.data.scope}
-                            </p>
-                          </div>
-                        )}
-                        {w.data.stack && (
-                          <div class="flex flex-col items-start gap-2">
-                            <p class="text-grey-300 leading-[1.4]">Stack</p>
-                            <p class="text-grey-600 leading-[1.4] wrap-break-word whitespace-normal">
-                              {w.data.stack}
-                            </p>
+                      {/* Meta + Buttons */}
+                      <div class="flex w-full flex-col items-start gap-7 md:items-end">
+                        <div class="font-figtree flex w-full flex-col items-start gap-4 text-base font-bold whitespace-nowrap min-[1000px]:flex-row min-[1000px]:items-center min-[1000px]:justify-end min-[1000px]:gap-8">
+                          {w.data.date && (
+                            <div class="flex flex-col items-start gap-2">
+                              <p class="text-grey-300 leading-[1.4]">Date</p>
+                              <p class="text-grey-600 leading-[1.4]">{w.data.date}</p>
+                            </div>
+                          )}
+                          {w.data.scope && (
+                            <div class="flex flex-col items-start gap-2">
+                              <p class="text-grey-300 leading-[1.4]">Scope</p>
+                              <p class="text-grey-600 leading-[1.4] wrap-break-word whitespace-normal">
+                                {w.data.scope}
+                              </p>
+                            </div>
+                          )}
+                          {w.data.stack && (
+                            <div class="flex flex-col items-start gap-2">
+                              <p class="text-grey-300 leading-[1.4]">Stack</p>
+                              <p class="text-grey-600 leading-[1.4] wrap-break-word whitespace-normal">
+                                {w.data.stack}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        {(w.data.github || w.data.website || w.data.notion) && (
+                          <div class="flex w-full flex-col gap-3 min-[1000px]:w-auto min-[1000px]:flex-row min-[1000px]:items-center">
+                            {w.data.github && (
+                              <a
+                                href={w.data.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="font-figtree border-grey-600 text-grey-600 flex w-full items-center justify-center gap-2 rounded-full border px-5 py-3.5 text-sm font-bold transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
+                              >
+                                <img
+                                  src={githubIconSrc}
+                                  class="h-5 w-5"
+                                  alt=""
+                                  aria-hidden="true"
+                                />
+                                View on GitHub
+                              </a>
+                            )}
+                            {w.data.notion && (
+                              <a
+                                href={w.data.notion}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="font-figtree bg-grey-600 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
+                              >
+                                <img
+                                  src={notionIconSrc}
+                                  class="h-5 w-5"
+                                  alt=""
+                                  aria-hidden="true"
+                                />
+                                View on Notion
+                              </a>
+                            )}
+                            {w.data.website && (
+                              <a
+                                href={w.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="font-figtree bg-grey-600 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
+                              >
+                                Visit Website
+                                <img
+                                  src={arrowIconSrc}
+                                  class="h-5 w-5 brightness-0 invert"
+                                  alt=""
+                                  aria-hidden="true"
+                                />
+                              </a>
+                            )}
                           </div>
                         )}
                       </div>
-                      {(w.data.github || w.data.website || w.data.notion) && (
-                        <div class="flex w-full flex-col gap-3 min-[1000px]:w-auto min-[1000px]:flex-row min-[1000px]:items-center">
-                          {w.data.github && (
-                            <a
-                              href={w.data.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="font-figtree border-grey-600 text-grey-600 flex w-full items-center justify-center gap-2 rounded-full border px-5 py-3.5 text-sm font-bold transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
-                            >
-                              <img src={githubIconSrc} class="h-5 w-5" alt="" aria-hidden="true" />
-                              View on GitHub
-                            </a>
-                          )}
-                          {w.data.notion && (
-                            <a
-                              href={w.data.notion}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="font-figtree bg-grey-600 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
-                            >
-                              <img src={notionIconSrc} class="h-5 w-5" alt="" aria-hidden="true" />
-                              View on Notion
-                            </a>
-                          )}
-                          {w.data.website && (
-                            <a
-                              href={w.data.website}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="font-figtree bg-grey-600 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
-                            >
-                              Visit Website
-                              <img
-                                src={arrowIconSrc}
-                                class="h-5 w-5 brightness-0 invert"
-                                alt=""
-                                aria-hidden="true"
-                              />
-                            </a>
-                          )}
-                        </div>
-                      )}
                     </div>
+
+                    {/* Hero image */}
+                    {heroSrc && (
+                      <Image
+                        src={heroSrc}
+                        alt={w.data.title}
+                        class="aspect-[1.618/1] w-full rounded-xl object-cover md:rounded-2xl"
+                        format="webp"
+                      />
+                    )}
                   </div>
 
-                  {/* Hero image */}
-                  {heroSrc && (
-                    <Image
-                      src={heroSrc}
-                      alt={w.data.title}
-                      class="aspect-[1.618/1] w-full rounded-lg object-cover md:rounded-2xl"
-                      format="webp"
-                    />
+                  {/* Overview */}
+                  {w.data.overview && (
+                    <div class="flex w-full flex-col items-start gap-6 md:max-w-220 md:flex-row md:gap-[8%]">
+                      <p class="text-grey-600 shrink-0 text-xl leading-none font-bold md:text-[26px]">
+                        Overview
+                      </p>
+                      <p class="text-grey-600 flex-1 text-sm leading-[1.8] md:text-base">
+                        {w.data.overview}
+                      </p>
+                    </div>
                   )}
                 </div>
 
-                {/* Overview */}
-                {w.data.overview && (
-                  <div class="flex w-full flex-col items-start gap-6 md:max-w-220 md:flex-row md:gap-[8%]">
-                    <p class="text-grey-600 shrink-0 text-xl leading-none font-bold md:text-[26px]">
-                      Overview
-                    </p>
-                    <p class="text-grey-600 flex-1 text-sm leading-[1.8] md:text-base">
-                      {w.data.overview}
-                    </p>
+                {/* Sections */}
+                {w.data.sections.length > 0 && (
+                  <div class="flex w-full flex-col items-center gap-16 px-0 py-10 min-[1200px]:gap-20 min-[1200px]:px-16 md:py-20">
+                    {w.data.sections.map((section) => {
+                      const sectionSrc = resolveImage(w.id, section.image);
+                      const sectionVideo = resolveVideo(w.id, section.video);
+                      return (
+                        <div class="flex w-full flex-col items-center gap-10 md:max-w-220 md:gap-16">
+                          <div class="flex w-full flex-col items-start px-0 min-[768px]:px-8 min-[1200px]:px-16">
+                            <div class="text-grey-600 flex w-full flex-col items-start gap-4 md:gap-8">
+                              <div class="w-full text-xl leading-[1.6] font-bold md:text-[32px]">
+                                {section.heading
+                                  .trim()
+                                  .split('\n')
+                                  .map((line) => (
+                                    <p>{line}</p>
+                                  ))}
+                              </div>
+                              <div class="flex flex-col gap-2 text-sm leading-[1.8] min-[768px]:gap-4 md:text-base">
+                                {section.body.map((p) => (
+                                  <p>{p}</p>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          {sectionVideo?.mp4 || sectionVideo?.webm ? (
+                            <video class="w-full" muted loop playsinline data-autoplay-video>
+                              {sectionVideo.webm && (
+                                <source src={sectionVideo.webm} type="video/webm" />
+                              )}
+                              {sectionVideo.mp4 && (
+                                <source src={sectionVideo.mp4} type="video/mp4" />
+                              )}
+                            </video>
+                          ) : sectionSrc ? (
+                            <div class="bg-grey-100 w-full rounded-xl px-4 py-7 min-[1200px]:px-16 min-[1200px]:py-12 md:rounded-2xl md:px-8">
+                              <Image src={sectionSrc} alt="" class="w-full" format="webp" />
+                            </div>
+                          ) : null}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
-
-              {/* Sections */}
-              {w.data.sections.length > 0 && (
-                <div class="flex w-full flex-col items-center gap-16 px-0 py-10 min-[1200px]:gap-20 min-[1200px]:px-16 md:py-20">
-                  {w.data.sections.map((section) => {
-                    const sectionSrc = resolveImage(w.id, section.image);
-                    const sectionVideo = resolveVideo(w.id, section.video);
-                    return (
-                      <div class="flex w-full flex-col items-center gap-10 md:max-w-220 md:gap-16">
-                        <div class="flex w-full flex-col items-start px-0 min-[768px]:px-8 min-[1200px]:px-16">
-                          <div class="text-grey-600 flex w-full flex-col items-start gap-4 md:gap-8">
-                            <div class="w-full text-xl leading-[1.6] font-bold md:text-[32px]">
-                              {section.heading
-                                .trim()
-                                .split('\n')
-                                .map((line) => (
-                                  <p>{line}</p>
-                                ))}
-                            </div>
-                            <div class="flex flex-col gap-2 text-sm leading-[1.8] min-[768px]:gap-4 md:text-base">
-                              {section.body.map((p) => (
-                                <p>{p}</p>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        {sectionVideo?.mp4 || sectionVideo?.webm ? (
-                          <video class="w-full" muted loop playsinline data-autoplay-video>
-                            {sectionVideo.webm && (
-                              <source src={sectionVideo.webm} type="video/webm" />
-                            )}
-                            {sectionVideo.mp4 && <source src={sectionVideo.mp4} type="video/mp4" />}
-                          </video>
-                        ) : sectionSrc ? (
-                          <div class="bg-grey-100 w-full rounded-lg px-8 py-12 min-[1200px]:px-16 md:rounded-2xl">
-                            <Image src={sectionSrc} alt="" class="w-full" format="webp" />
-                          </div>
-                        ) : null}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          );
-        })
-      }
+            );
+          })
+        }
+      </div>{/* end popup-scroll */}
     </div>
   </div>
 </div>
 
 <style>
-  #popup {
+  #popup-scroll {
     scrollbar-width: none;
   }
-  #popup::-webkit-scrollbar {
+  #popup-scroll::-webkit-scrollbar {
     display: none;
   }
 </style>
@@ -243,6 +261,7 @@ function resolveVideo(id: string, path: string | undefined) {
 <script>
   const popup = document.getElementById('popup')!;
   const popupContent = document.getElementById('popup-content')!;
+  const popupScroll = document.getElementById('popup-scroll')!;
   const popupOverlay = document.getElementById('popup-overlay')!;
   const closeBtn = document.getElementById('popup-close')!;
 
@@ -276,7 +295,7 @@ function resolveVideo(id: string, path: string | undefined) {
     popupContent.classList.remove('is-entering');
     popup.classList.remove('is-closing');
     popup.classList.add('is-open');
-    popup.scrollTop = 0;
+    popupScroll.scrollTop = 0;
 
     // #3: double-rAF for cross-browser reliability
     enterRafId = requestAnimationFrame(() => {
