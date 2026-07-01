@@ -50,13 +50,10 @@ function resolveVideo(id: string, path: string | undefined) {
     aria-hidden="true"
   >
   </div>
-  <div
-    class="absolute inset-0 flex items-center justify-center px-0 py-6 md:px-12 md:py-10"
-    id="popup-overlay"
-  >
+  <div class="absolute inset-0 flex items-end justify-center px-0 md:px-12" id="popup-overlay">
     <div
       id="popup-content"
-      class="relative flex max-h-[90dvh] w-full max-w-312 flex-col items-center overflow-hidden rounded-xl bg-white md:rounded-2xl"
+      class="relative flex max-h-[94dvh] w-full max-w-312 flex-col items-center overflow-hidden rounded-t-xl bg-white md:rounded-t-2xl"
     >
       <!-- Close button -->
       <button
@@ -71,7 +68,7 @@ function resolveVideo(id: string, path: string | undefined) {
       <!-- Scrollable inner -->
       <div
         id="popup-scroll"
-        class="flex w-full flex-col items-center overflow-y-auto px-5 pt-16 pb-8 md:px-12 md:pt-20 md:pb-10"
+        class="flex w-full flex-col items-center overflow-y-auto overscroll-contain px-5 pt-16 pb-2 md:px-12 md:pt-20 md:pb-4"
       >
         <!-- One panel per work, statically rendered by Astro -->
         {
@@ -267,6 +264,7 @@ function resolveVideo(id: string, path: string | undefined) {
 
   let enterRafId: number | null = null;
   let activePanel: HTMLElement | null = null;
+  let closingPanel: HTMLElement | null = null;
 
   function cancelEnterRaf() {
     if (enterRafId !== null) {
@@ -277,16 +275,19 @@ function resolveVideo(id: string, path: string | undefined) {
 
   function onCloseTransitionEnd(e: TransitionEvent) {
     if (e.propertyName !== 'transform') return;
-    if (!popup.classList.contains('is-closing')) return; // #2: stale event after re-open
+    if (!popup.classList.contains('is-closing')) return;
     popupContent.removeEventListener('transitionend', onCloseTransitionEnd);
     popup.classList.remove('is-open', 'is-closing');
+    closingPanel?.classList.remove('is-open');
+    closingPanel = null;
   }
 
   function openPopup(slug: string) {
-    // #1: validate before clearing the current panel
     const nextPanel = document.querySelector<HTMLElement>(`[data-popup-panel="${slug}"]`);
     if (!nextPanel) return;
     activePanel?.classList.remove('is-open');
+    closingPanel?.classList.remove('is-open');
+    closingPanel = null;
     activePanel = nextPanel;
     activePanel.classList.add('is-open');
 
@@ -297,7 +298,6 @@ function resolveVideo(id: string, path: string | undefined) {
     popup.classList.add('is-open');
     popupScroll.scrollTop = 0;
 
-    // #3: double-rAF for cross-browser reliability
     enterRafId = requestAnimationFrame(() => {
       enterRafId = requestAnimationFrame(() => {
         enterRafId = null;
@@ -307,10 +307,9 @@ function resolveVideo(id: string, path: string | undefined) {
   }
 
   function closePopup() {
-    // #4: guard on is-open too, not just is-closing
     if (!popup.classList.contains('is-open') || popup.classList.contains('is-closing')) return;
     cancelEnterRaf();
-    activePanel?.classList.remove('is-open');
+    closingPanel = activePanel;
     activePanel = null;
     const wasEntering = popupContent.classList.contains('is-entering');
     popupContent.classList.remove('is-entering');
@@ -318,6 +317,8 @@ function resolveVideo(id: string, path: string | undefined) {
       popup.classList.add('is-closing');
       popupContent.addEventListener('transitionend', onCloseTransitionEnd);
     } else {
+      closingPanel?.classList.remove('is-open');
+      closingPanel = null;
       popup.classList.remove('is-open');
     }
   }
