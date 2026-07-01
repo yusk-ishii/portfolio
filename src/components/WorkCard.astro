@@ -19,7 +19,7 @@ function resolveImage(id: string, path: string | undefined) {
   return allImages[key]?.default;
 }
 
-const heroSrc = resolveImage(entry.id, entry.data.heroImage);
+const heroSrc = resolveImage(entry.id, entry.data.thumbnailImage ?? entry.data.heroImage);
 ---
 
 <button

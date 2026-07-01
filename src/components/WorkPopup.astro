@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import githubIconSrc from '../assets/icons/github.svg?url';
+import notionIconSrc from '../assets/icons/notion.svg?url';
 import arrowIconSrc from '../assets/icons/arrow-up-right.svg?url';
 import closeIconSrc from '../assets/icons/close.svg?url';
 
@@ -45,7 +46,7 @@ function resolveVideo(id: string, path: string | undefined) {
 >
   <div
     id="popup-bg"
-    class="pointer-events-none fixed inset-0 bg-black/20 backdrop-blur-sm"
+    class="pointer-events-none fixed inset-0 bg-black/20 backdrop-blur-xs"
     aria-hidden="true"
   >
   </div>
@@ -60,7 +61,7 @@ function resolveVideo(id: string, path: string | undefined) {
       <!-- Close button -->
       <button
         id="popup-close"
-        class="text-grey-600 absolute top-4 right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition-opacity hover:opacity-60 md:top-8 md:right-8 md:h-10 md:w-10"
+        class="absolute top-4 right-4 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full md:top-8 md:right-8 md:h-10 md:w-10"
         aria-label="閉じる"
         type="button"
       >
@@ -111,7 +112,7 @@ function resolveVideo(id: string, path: string | undefined) {
                           </div>
                         )}
                       </div>
-                      {(w.data.github || w.data.website) && (
+                      {(w.data.github || w.data.website || w.data.notion) && (
                         <div class="flex w-full flex-col gap-3 min-[1000px]:w-auto min-[1000px]:flex-row min-[1000px]:items-center">
                           {w.data.github && (
                             <a
@@ -122,6 +123,17 @@ function resolveVideo(id: string, path: string | undefined) {
                             >
                               <img src={githubIconSrc} class="h-5 w-5" alt="" aria-hidden="true" />
                               View on GitHub
+                            </a>
+                          )}
+                          {w.data.notion && (
+                            <a
+                              href={w.data.notion}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="font-figtree bg-grey-600 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-opacity duration-200 ease-out hover:opacity-70 min-[1000px]:w-auto"
+                            >
+                              <img src={notionIconSrc} class="h-5 w-5" alt="" aria-hidden="true" />
+                              View on Notion
                             </a>
                           )}
                           {w.data.website && (
@@ -146,15 +158,13 @@ function resolveVideo(id: string, path: string | undefined) {
                   </div>
 
                   {/* Hero image */}
-                  {heroSrc ? (
+                  {heroSrc && (
                     <Image
                       src={heroSrc}
                       alt={w.data.title}
                       class="aspect-[1.618/1] w-full rounded-lg object-cover md:rounded-2xl"
                       format="webp"
                     />
-                  ) : (
-                    <div class="aspect-[1.618/1] w-full rounded-lg bg-[#d9d9d9] md:rounded-2xl" />
                   )}
                 </div>
 
@@ -173,14 +183,14 @@ function resolveVideo(id: string, path: string | undefined) {
 
               {/* Sections */}
               {w.data.sections.length > 0 && (
-                <div class="flex w-full flex-col items-center gap-16 px-0 py-10 min-[768px]:gap-20 min-[1200px]:gap-32 min-[1200px]:px-16 md:py-20">
+                <div class="flex w-full flex-col items-center gap-16 px-0 py-10 min-[1200px]:gap-20 min-[1200px]:px-16 md:py-20">
                   {w.data.sections.map((section) => {
                     const sectionSrc = resolveImage(w.id, section.image);
                     const sectionVideo = resolveVideo(w.id, section.video);
                     return (
                       <div class="flex w-full flex-col items-center gap-10 md:max-w-220 md:gap-16">
                         <div class="flex w-full flex-col items-start px-0 min-[768px]:px-8 min-[1200px]:px-16">
-                          <div class="text-grey-600 flex w-full flex-col items-start gap-6 md:gap-10">
+                          <div class="text-grey-600 flex w-full flex-col items-start gap-4 md:gap-8">
                             <div class="w-full text-xl leading-[1.6] font-bold md:text-[32px]">
                               {section.heading
                                 .trim()
@@ -189,7 +199,7 @@ function resolveVideo(id: string, path: string | undefined) {
                                   <p>{line}</p>
                                 ))}
                             </div>
-                            <div class="flex flex-col gap-4 text-sm leading-[1.8] md:text-base">
+                            <div class="flex flex-col gap-2 text-sm leading-[1.8] min-[768px]:gap-4 md:text-base">
                               {section.body.map((p) => (
                                 <p>{p}</p>
                               ))}
@@ -207,9 +217,7 @@ function resolveVideo(id: string, path: string | undefined) {
                           <div class="bg-grey-100 w-full rounded-lg px-8 py-12 min-[1200px]:px-16 md:rounded-2xl">
                             <Image src={sectionSrc} alt="" class="w-full" format="webp" />
                           </div>
-                        ) : (
-                          <div class="aspect-[1.618/1] w-full rounded-lg bg-[#d9d9d9] md:rounded-2xl" />
-                        )}
+                        ) : null}
                       </div>
                     );
                   })}
@@ -283,7 +291,8 @@ function resolveVideo(id: string, path: string | undefined) {
     // #4: guard on is-open too, not just is-closing
     if (!popup.classList.contains('is-open') || popup.classList.contains('is-closing')) return;
     cancelEnterRaf();
-    activePanel = null; // #5: clear stale reference
+    activePanel?.classList.remove('is-open');
+    activePanel = null;
     const wasEntering = popupContent.classList.contains('is-entering');
     popupContent.classList.remove('is-entering');
     if (wasEntering) {
