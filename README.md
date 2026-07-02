@@ -2,8 +2,6 @@
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=flat-square&logo=github)](https://yusk-ishii.github.io/portfolio/)
 
-石井 佑典のポートフォリオサイトです。
-
 ## 使用技術
 
 | カテゴリ | 技術 |
