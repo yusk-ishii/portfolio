@@ -219,7 +219,14 @@ function resolveVideo(id: string, path: string | undefined) {
                             </div>
                           </div>
                           {sectionVideo?.mp4 || sectionVideo?.webm ? (
-                            <video class="w-full" muted loop playsinline data-autoplay-video>
+                            <video
+                              class="w-full"
+                              muted
+                              loop
+                              playsinline
+                              preload="auto"
+                              data-autoplay-video
+                            >
                               {sectionVideo.webm && (
                                 <source src={sectionVideo.webm} type="video/webm" />
                               )}
